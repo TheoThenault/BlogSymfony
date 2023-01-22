@@ -10,7 +10,7 @@
             <a href="{{ path('base') }}">Acceuil</a>
             <a href="{{ path('blog_list') }}">Blog</a>
         {% endblock %}
-        {% block left_menu %}{% endblock %}
+        {% block left_menu %}{{ include('last_articles.html.twig', {'nArticles': '3'}) }}{% endblock %}
         {% block content %}{% endblock %}
     </body>
 </html>

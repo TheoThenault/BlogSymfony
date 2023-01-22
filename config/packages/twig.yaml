@@ -1,5 +1,8 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+    globals:
+        article_max_chars: 50
+        last_articles_len: 5
 
 when@test:
     twig:

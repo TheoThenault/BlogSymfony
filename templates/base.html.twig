@@ -26,7 +26,7 @@
             {# DERNIERS ARTICLES #}
             <ul style="padding: 0; margin: 0 40px 0 0; max-width: 250px;">
                 <li><h2>Derniers articles</h2></li>
-                {% block left_menu %}{{ include('last_articles.html.twig', {'nArticles': '3'}) }}{% endblock %}
+                {% block left_menu %}{{ include('last_articles.html.twig', {'nArticles': last_articles_len}) }}{% endblock %}
             </ul>
 
             {# CONTENU DE LA PAGE #}

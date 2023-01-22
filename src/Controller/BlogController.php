@@ -29,4 +29,26 @@ class BlogController extends AbstractController
             'controller_name' => 'BlogController',
         ]);
     }
+
+    #[Route(
+        '/article/{idArticle}',
+        name:           '_view',
+        requirements:   ['$idArticle' => '\d+'],
+        defaults:       ['$idArticle' => 0])
+    ]
+    public function viewArticle($idArticle): Response
+    {
+        if($idArticle <= 0)
+        {
+            //TODO? Page 404 personnalisé ?
+            throw new NotFoundHttpException('La page n\'existe pas');
+        }
+
+        return $this->render('blog/view/view.html.twig', [
+            'controller_name' => 'BlogController',
+        ]);
+    }
+
+
+
 }

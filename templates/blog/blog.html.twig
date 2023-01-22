@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} ~ by théo
+{% endblock %}
+
+{% block h1 %}
+    Bienvenue sur mon blog
+{% endblock %}
+
+{% block menu %}
+    {{ parent() }}
+    <a href="{{ path('blog_add') }}">Ajouter une page</a>
+{% endblock %}
+
+{% block content %}
+    {% block content_blog %}{% endblock %}
+    {% block pagination %}{% endblock %}
+{% endblock %}

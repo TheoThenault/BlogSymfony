@@ -73,6 +73,26 @@ class BlogController extends AbstractController
     }
 
     #[Route(
+        '/article/delete/{idArticle}',
+        name:           '_delete',
+        requirements:   ['$idArticle' => '\d+'],
+        defaults:       ['$idArticle' => 0]
+    )]
+    public function deleteArticle($idArticle): Response
+    {
+        if($idArticle <= 0) //TODO Changer avec une requete doctrine
+        {
+            //TODO? Page 404 personnalisé ?
+            throw new NotFoundHttpException('La page n\'existe pas');
+        }
+
+        // messasge de succès
+        $this->addFlash('info', '.....');
+
+        return $this->redirectToRoute('blog_list');
+    }
+
+    #[Route(
                         '/article/{idArticle}',
         name:           '_view',
         requirements:   ['$idArticle' => '\d+'],

@@ -1,5 +1,7 @@
 <ul>
-    <li>Article x</li>
-    <li>Article y</li>
-    <li>Article z</li>
+    {% for i in 1..nArticles %}
+        <li><a href="#">Article {{ i }}</a></li>
+    {% else %}
+        <li><p>Aucun article!</p></li>
+    {% endfor %}
 </ul>

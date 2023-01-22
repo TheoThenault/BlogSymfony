@@ -17,7 +17,7 @@ class BlogController extends AbstractController
         requirements:   ['nPage' => '\d+'],
         defaults:       ['nPage' => 1])
     ]
-    public function index($nPage): Response
+    public function listArticles($nPage): Response
     {
         if($nPage <= 0)
         {

@@ -2,6 +2,12 @@
 
 {% block title %}Lecture{% endblock %}
 
+{% block menu %}
+    {{ parent() }}
+    <a href="{{ path('blog_edit', {'idArticle': '42'}) }}">Modifier</a>
+    <a href="{{ path('blog_delete', {'idArticle': '42'}) }}">Supprimer</a>
+{% endblock %}
+
 {% block content_blog %}
     <h2>Tire de l'article</h2>
     <h3>Auteur</h3>

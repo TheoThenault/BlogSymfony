@@ -25,9 +25,7 @@ class BlogController extends AbstractController
             throw new NotFoundHttpException('La page n\'existe pas');
         }
 
-        return $this->render('blog/list/list.html.twig', [
-            'controller_name' => 'BlogController',
-        ]);
+        return $this->render('blog/list/list.html.twig');
     }
 
     #[Route(

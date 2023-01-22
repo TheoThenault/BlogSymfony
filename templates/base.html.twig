@@ -5,8 +5,11 @@
         <title>{% block title %}Blog{% endblock %}</title>
     </head>
     <body>
-        {% block h1 %}{% endblock %}
-        {% block menu %}{% endblock %}
+    <h1>{% block h1 %}Blog sur le développement symfony{% endblock %}</h1>
+        {% block menu %}
+            <a href="{{ path('base') }}">Acceuil</a>
+            <a href="{{ path('blog_list') }}">Blog</a>
+        {% endblock %}
         {% block left_menu %}{% endblock %}
         {% block content %}{% endblock %}
     </body>

@@ -47,6 +47,32 @@ class BlogController extends AbstractController
     }
 
     #[Route(
+        '/article/edit/{idArticle}',
+        name:           '_edit',
+        requirements:   ['$idArticle' => '\d+'],
+        defaults:       ['$idArticle' => 0]
+    )]
+    public function editArticle($idArticle): Response
+    {
+        if($idArticle <= 0)
+        {
+            //TODO? Page 404 personnalisé ?
+            throw new NotFoundHttpException('La page n\'existe pas');
+        }
+        
+        if(false)
+        {
+            // traitement du formulaire
+
+            // messasge de succès
+            $this->addFlash('info', '.....');
+            return $this->redirectToRoute('blog_list'); //TODO? rediriger vers la lecture de l'article?
+        }
+
+        return $this->render('blog/edit/edit.html.twig');
+    }
+
+    #[Route(
                         '/article/{idArticle}',
         name:           '_view',
         requirements:   ['$idArticle' => '\d+'],

@@ -15,8 +15,8 @@ class BlogController extends AbstractController
                         '/list/{nPage}',
         name:           '_list',
         requirements:   ['nPage' => '\d+'],
-        defaults:       ['nPage' => 1])
-    ]
+        defaults:       ['nPage' => 1]
+    )]
     public function listArticles($nPage): Response
     {
         if($nPage <= 0)
@@ -50,8 +50,8 @@ class BlogController extends AbstractController
                         '/article/{idArticle}',
         name:           '_view',
         requirements:   ['$idArticle' => '\d+'],
-        defaults:       ['$idArticle' => 0])
-    ]
+        defaults:       ['$idArticle' => 0]
+    )]
     public function viewArticle($idArticle): Response
     {
         if($idArticle <= 0)

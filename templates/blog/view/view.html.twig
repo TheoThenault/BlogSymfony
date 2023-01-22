@@ -2,6 +2,10 @@
 
 {% block title %}Lecture{% endblock %}
 
+{% block h1 %}
+    Lecture d'article
+{% endblock %}
+
 {% block menu %}
     {{ parent() }}
     <a href="{{ path('blog_edit', {'idArticle': '42'}) }}">Modifier</a>

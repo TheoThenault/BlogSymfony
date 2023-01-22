@@ -1,0 +1,13 @@
+{% macro gen(article) %}
+    <article>
+        {# nom de l'article #}
+        <a href="#">Article {{ article }}</a>
+
+        {# description #}
+        <p>
+            {{
+            'Eloquentiam dictas detracto scripserit dictas urbanitas. Eruditi deserunt iuvaret lacinia fastidii eirmod mauris debet dicam. Laudem has veritus brute suas curae possit iusto consectetuer.'
+            |u.truncate(50) }}
+        </p>
+    </article>
+{% endmacro gen %}

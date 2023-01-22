@@ -29,6 +29,24 @@ class BlogController extends AbstractController
     }
 
     #[Route(
+        '/article/add',
+        name:           '_add'
+    )]
+    public function addArticle(): Response
+    {
+        if(false)
+        {
+            // traitement du formulaire
+
+            // messasge de succès
+            $this->addFlash('info', '.....');
+            return $this->redirectToRoute('blog_list'); //TODO? rediriger vers la lecture de l'article?
+        }
+
+        return $this->render('blog/add/add.html.twig');
+    }
+
+    #[Route(
                         '/article/{idArticle}',
         name:           '_view',
         requirements:   ['$idArticle' => '\d+'],
@@ -41,10 +59,8 @@ class BlogController extends AbstractController
             //TODO? Page 404 personnalisé ?
             throw new NotFoundHttpException('La page n\'existe pas');
         }
-
         return $this->render('blog/view/view.html.twig');
     }
-
 
 
 }

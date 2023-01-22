@@ -29,7 +29,7 @@ class BlogController extends AbstractController
     }
 
     #[Route(
-        '/article/{idArticle}',
+                        '/article/{idArticle}',
         name:           '_view',
         requirements:   ['$idArticle' => '\d+'],
         defaults:       ['$idArticle' => 0])

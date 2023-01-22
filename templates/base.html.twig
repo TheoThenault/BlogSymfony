@@ -10,6 +10,9 @@
             <a href="{{ path('base') }}">Acceuil</a>
             <a href="{{ path('blog_list') }}">Blog</a>
         {% endblock %}
+        {% for msg in app.session.flashBag.get('info') %}
+            <p>{{ msg }}</p>
+        {% endfor %}
         {% block left_menu %}{{ include('last_articles.html.twig', {'nArticles': '3'}) }}{% endblock %}
         {% block content %}{% endblock %}
     </body>

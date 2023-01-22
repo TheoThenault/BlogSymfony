@@ -39,7 +39,7 @@ class BlogController extends AbstractController
             // traitement du formulaire
 
             // messasge de succès
-            $this->addFlash('info', '.....');
+            $this->addFlash('info', 'Article créé !');
             return $this->redirectToRoute('blog_list'); //TODO? rediriger vers la lecture de l'article?
         }
 
@@ -65,7 +65,7 @@ class BlogController extends AbstractController
             // traitement du formulaire
 
             // messasge de succès
-            $this->addFlash('info', '.....');
+            $this->addFlash('info', 'Article modifié !');
             return $this->redirectToRoute('blog_list'); //TODO? rediriger vers la lecture de l'article?
         }
 
@@ -87,7 +87,7 @@ class BlogController extends AbstractController
         }
 
         // messasge de succès
-        $this->addFlash('info', '.....');
+        $this->addFlash('info', 'Article suprimé !');
 
         return $this->redirectToRoute('blog_list');
     }

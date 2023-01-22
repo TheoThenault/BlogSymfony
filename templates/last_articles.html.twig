@@ -1,6 +1,6 @@
 <ul>
     {% for i in 1..nArticles %}
-        <li><a href="#">Article {{ i }}</a></li>
+        <li><a href="{{ path('blog_view', {'idArticle': i}) }}">Article {{ i }}</a></li>
     {% else %}
         <li><p>Aucun article!</p></li>
     {% endfor %}

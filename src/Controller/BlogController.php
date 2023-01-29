@@ -39,15 +39,11 @@ class BlogController extends AbstractController
         $articles = $articleRepo->findPublishedArticlesPaged($nPage, $perPage);
 
         $pageMax = intval(ceil(count($articles)/$perPage));
-        if($nPage > $pageMax)
+        if($nPage != 1 && $nPage > $pageMax)  // Différent de 1 car si la BDD est vide on veut quand même afficher une page basique pour l'utilisateur
         {
             throw new NotFoundHttpException('La page n\'existe pas');
         }
 
-        foreach ($articles as $a)
-        {
-            dump($a);
-        }
         return $this->render('blog/list/list.html.twig', ['listArticles' => $articles]);
     }
 

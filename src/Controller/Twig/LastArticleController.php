@@ -15,7 +15,7 @@ class LastArticleController extends AbstractController
         $articleRepo = $entityManager->getRepository(Article::class);
         // récupérer les articles
         $articles = $articleRepo->findBy(['published' => true],['createdAt' => 'desc'], $number);
-        dump($articles);
+        //dump($articles);
         return $this->render('last_articles.html.twig', ['articles' => $articles]);
     }
 }

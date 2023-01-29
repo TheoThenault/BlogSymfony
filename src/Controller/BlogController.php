@@ -125,7 +125,7 @@ class BlogController extends AbstractController
             throw new NotFoundHttpException('La page n\'existe pas');
         }
         $articleRepo = $entityManager->getRepository(Article::class);
-        $article = $articleRepo->findOneBy(['id' => $idArticle]);
+        $article = $articleRepo->findByIDWithOrderedComments($idArticle);
         if(is_null($article))
         {
             throw new NotFoundHttpException('La page n\'existe pas');

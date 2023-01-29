@@ -52,6 +52,21 @@ class ArticleRepository extends ServiceEntityRepository
         return new Paginator($query);
     }
 
+    public function findByIDWithOrderedComments($articleID) : mixed
+    {
+        $queryBuilder = $this->createQueryBuilder('article');
+        $queryBuilder->addSelect('article');
+        $queryBuilder->where('article.id = :id');
+        $queryBuilder->setParameter('id', $articleID);
+        $queryBuilder->leftJoin('article.comments', 'comments');
+        $queryBuilder->addSelect('comments');
+        $queryBuilder->addOrderBy('comments.createdAt', 'DESC');
+
+
+        return $queryBuilder->getQuery()->getResult()[0];
+    }
+
+
 //    /**
 //     * @return Article[] Returns an array of Article objects
 //     */

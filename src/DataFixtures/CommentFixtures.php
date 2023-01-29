@@ -3,7 +3,9 @@
 namespace App\DataFixtures;
 
 use App\Entity\Comment;
+use DateInterval;
 use Doctrine\Persistence\ObjectManager;
+use App\Entity\Article;
 
 class CommentFixtures
 {
@@ -42,12 +44,17 @@ class CommentFixtures
                 $com = rand(0, count($possible_comments)-1);
                 $aut = rand(0, count($possible_authors)-1);
                 $tit = rand(0, count($possible_title)-1);
+                $date = clone $list_articles[$currArticle]->getCreatedAt();
+                try {
+                    $date->add(new DateInterval('P' . rand(1, 10) . 'D'));
+                } catch (\Exception $e) {
+                }
 
                 $comment = new Comment();
                 $comment->setTitle($possible_title[$tit]);
                 $comment->setAuthor($possible_authors[$aut]);
                 $comment->setMessage($possible_comments[$com]);
-                $comment->setCreatedAt(new \DateTime('2023-01-29'));
+                $comment->setCreatedAt($date);
                 $comment->setArticle($list_articles[$currArticle]);
 
                 $this->list_comments[] = $comment;

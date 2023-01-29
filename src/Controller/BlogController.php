@@ -121,14 +121,21 @@ class BlogController extends AbstractController
         requirements:   ['$idArticle' => '\d+'],
         defaults:       ['$idArticle' => 0]
     )]
-    public function viewArticle($idArticle): Response
+    public function viewArticle($idArticle, EntityManagerInterface $entityManager): Response
     {
         if($idArticle <= 0)
         {
             //TODO? Page 404 personnalisé ?
             throw new NotFoundHttpException('La page n\'existe pas');
         }
-        return $this->render('blog/view/view.html.twig');
+        $articleRepo = $entityManager->getRepository(Article::class);
+        $article = $articleRepo->findOneBy(['id' => $idArticle]);
+        if(is_null($article))
+        {
+            throw new NotFoundHttpException('La page n\'existe pas');
+        }
+
+        return $this->render('blog/view/view.html.twig', ['article' => $article]);
     }
 
 

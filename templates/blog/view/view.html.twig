@@ -8,13 +8,13 @@
 
 {% block menu %}
     {{ parent() }}
-    <a href="{{ path('blog_edit', {'idArticle': '42'}) }}">Modifier</a>
-    <a href="{{ path('blog_delete', {'idArticle': '42'}) }}">Supprimer</a>
+    <a href="{{ path('blog_edit', {'idArticle': article.id}) }}">Modifier</a>
+    <a href="{{ path('blog_delete', {'idArticle': article.id}) }}">Supprimer</a>
 {% endblock %}
 
 {% block content_blog %}
-    <h2>Tire de l'article</h2>
-    <h3>Auteur</h3>
-    <h4>Date de création / dernière modif</h4>
-    <p>Ius adversarium bibendum taciti aeque. Morbi disputationi offendit adversarium gubergren singulis gravida detracto. Ligula feugait sumo ius nonumes habitant feugait.</p>
+    <h2>{{ article.title }}</h2>
+    <h3>{{ article.author }}</h3>
+    <h4>{{ article.createdAt|date('d-m-Y') }} {% if article.updatedAt is not null %} / {{ article.updatedAt|date('d-m-Y') }} {% endif %}</h4>
+    <p>{{ article.content }}</p>
 {% endblock %}

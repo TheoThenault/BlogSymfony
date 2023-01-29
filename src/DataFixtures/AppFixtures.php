@@ -12,6 +12,9 @@ class AppFixtures extends Fixture
         $articlesFixtures = new ArticleFixtures();
         $articlesFixtures->charger($manager);
 
+        $commentFixtures = new CommentFixtures();
+        $commentFixtures->charger($manager, $articlesFixtures->list_articles);
+
         $manager->flush();
     }
 }

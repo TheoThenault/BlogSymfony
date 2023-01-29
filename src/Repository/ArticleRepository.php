@@ -62,7 +62,10 @@ class ArticleRepository extends ServiceEntityRepository
         $queryBuilder->addSelect('comments');
         $queryBuilder->addOrderBy('comments.createdAt', 'DESC');
 
-
+        if(is_null($queryBuilder->getQuery()->getResult()) || count($queryBuilder->getQuery()->getResult()) == 0)
+        {
+            return null;
+        }
         return $queryBuilder->getQuery()->getResult()[0];
     }
 

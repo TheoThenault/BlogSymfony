@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -37,6 +38,18 @@ class ArticleRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findPublishedArticlesPaged($currentPage, $perPage): Paginator
+    {
+        $queryBuilder = $this->createQueryBuilder('article');
+        $queryBuilder->where('article.published = true');
+        $queryBuilder->orderBy('article.createdAt', 'DESC');
+
+        $query = $queryBuilder->getQuery();
+        $query->setFirstResult(($currentPage - 1) * $perPage);
+        $query->setMaxResults($perPage);
+        return new Paginator($query);
     }
 
 //    /**

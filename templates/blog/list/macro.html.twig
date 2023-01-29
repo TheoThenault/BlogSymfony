@@ -1,13 +1,11 @@
 {% macro gen(article) %}
     <article>
         {# nom de l'article #}
-        <a href="{{ path('blog_view', {'idArticle': article}) }}">Article {{ article }}</a>
+        <a href="{{ path('blog_view', {'idArticle': article.id}) }}">Article {{ article.title }}</a>
 
         {# description #}
         <p>
-            {{
-            'Eloquentiam dictas detracto scripserit dictas urbanitas. Eruditi deserunt iuvaret lacinia fastidii eirmod mauris debet dicam. Laudem has veritus brute suas curae possit iusto consectetuer.'
-            |u.truncate(article_max_chars) }}
+            {{  article.content|u.truncate(article_max_chars) }}
         </p>
     </article>
 {% endmacro gen %}

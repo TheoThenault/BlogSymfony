@@ -5,13 +5,14 @@
 {% import 'blog/list/macro.html.twig' as utils %}
 
 {% block content_blog %}
-    <h2>Liste:</h2>
-    <ul>
-        <li>{{ utils.gen(1) }}</li>
-        <li>{{ utils.gen(2) }}</li>
-        <li>{{ utils.gen(3) }}</li>
-        <li>{{ utils.gen(4) }}</li>
-        <li>{{ utils.gen(5) }}</li>
-        <li>{{ utils.gen(6) }}</li>
-    </ul>
+    {% if listArticles is defined and listArticles is not empty %}
+        <h2>Liste:</h2>
+        <ul>
+            {% for article in listArticles %}
+                <li>{{ utils.gen(article) }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h2>Aucun articles pour l'instant !</h2>
+    {% endif %}
 {% endblock %}

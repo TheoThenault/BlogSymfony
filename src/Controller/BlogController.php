@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -17,15 +19,36 @@ class BlogController extends AbstractController
         requirements:   ['nPage' => '\d+'],
         defaults:       ['nPage' => 1]
     )]
-    public function listArticles($nPage): Response
+    public function listArticles($nPage, EntityManagerInterface $entityManager): Response
     {
         if($nPage <= 0)
         {
             //TODO? Page 404 personnalisé ?
             throw new NotFoundHttpException('La page n\'existe pas');
         }
+/*
+        $ArticleParDefaut = new Article();
+        $ArticleParDefaut->setAuthor("Théo")->setContent("Test")->setCreatedAt(new \DateTime('2023-01-29'))
+            ->setNbViews(0)->setPublished(true)->setTitle("Test");
+        $entityManager->persist($ArticleParDefaut);
+        $entityManager->flush();
+*/
 
-        return $this->render('blog/list/list.html.twig');
+        $perPage = 5;   // TODO Variable globale
+        $articleRepo = $entityManager->getRepository(Article::class);
+        $articles = $articleRepo->findPublishedArticlesPaged($nPage, $perPage);
+
+        $pageMax = intval(ceil(count($articles)/$perPage));
+        if($nPage > $pageMax)
+        {
+            throw new NotFoundHttpException('La page n\'existe pas');
+        }
+
+        foreach ($articles as $a)
+        {
+            dump($a);
+        }
+        return $this->render('blog/list/list.html.twig', ['listArticles' => $articles]);
     }
 
     #[Route(

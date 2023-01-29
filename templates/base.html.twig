@@ -23,9 +23,8 @@
         {% endfor %}
 
         <div style="display: flex">
-            {# DERNIERS ARTICLES #}
+            {# DERNIERS ARTICLES ET CATEGORIES #}
             <ul style="padding: 0; margin: 0 40px 0 0; max-width: 250px; min-width: 200px">
-                <li><h2>{{ last_articles_len }} derniers articles</h2></li>
                 {% block left_menu %}{{ render(controller('App\\Controller\\Twig\\LastArticleController::lastArticle', {'number' : last_articles_len})) }}{% endblock %}
             </ul>
 

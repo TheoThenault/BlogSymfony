@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Categorie;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -132,6 +133,27 @@ class BlogController extends AbstractController
         }
 
         return $this->render('blog/view/view.html.twig', ['article' => $article]);
+    }
+
+    #[Route(
+        '/categorie/{idCategorie}',
+        name:           '_categorie',
+        requirements:   ['$idCategorie' => '\d+'],
+        defaults:       ['$idCategorie' => 0]
+    )]
+    public function listArticleByCategorie($idCategorie, EntityManagerInterface $entityManager): Response
+    {
+        $catRepo = $entityManager->getRepository(Categorie::class);
+        $cat = $catRepo->findOneBy(['id'=>$idCategorie]);
+        if(is_null($cat))
+        {
+            throw new NotFoundHttpException('La page n\'existe pas');
+        }
+
+        $articleRepo = $entityManager->getRepository(Article::class);
+        $articles = $articleRepo->findByCategorie($idCategorie);
+
+        return $this->render('blog/categorie/categorie.html.twig', ['listArticles' => $articles, 'name' => $cat->getName()]);
     }
 
 

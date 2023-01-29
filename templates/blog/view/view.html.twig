@@ -17,6 +17,19 @@
         <h2>{{ article.title }}</h2>
         <h3>{{ article.author }}</h3>
         <h4>{{ article.createdAt|date('d-m-Y') }} {% if article.updatedAt is not null %} / {{ article.updatedAt|date('d-m-Y') }} {% endif %}</h4>
+
+        <h4>
+            <nav>
+                {% for categorie in article.categories %}
+                    {% if loop.first %}
+                        <span>Catégories: </span>
+                    {% endif %}
+                    <a href="{{ path('blog_categorie', {'idCategorie': categorie.id}) }}">{{ categorie.name }}</a>
+                {% endfor %}
+            </nav>
+        </h4>
+
+
         <p>{{ article.content }}</p>
     </article>
     {% if article.comments is not empty %}

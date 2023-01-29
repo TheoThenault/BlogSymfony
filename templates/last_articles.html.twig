@@ -1,7 +1,16 @@
+<li><h2>Catégories</h2></li>
 <ul>
-    {% for article in articles %}
-        <li><a href="{{ path('blog_view', {'idArticle': article.id}) }}">{{ article.title|u.truncate(article_title_preview_len) }}</a></li>
-    {% else %}
-        <li><p>Aucun article!</p></li>
-    {% endfor %}
+        {% for categorie in listCategories %}
+                <li><a href="{{ path('blog_categorie', {'idCategorie': categorie.id}) }}">{{ categorie.name }}</a></li>
+        {% else %}
+
+        {% endfor %}
+</ul>
+<li><h2>{{ last_articles_len }} derniers articles</h2></li>
+<ul>
+        {% for article in articles %}
+                <li><a href="{{ path('blog_view', {'idArticle': article.id}) }}">{{ article.title|u.truncate(article_title_preview_len) }}</a></li>
+        {% else %}
+                <li><p>Aucun article!</p></li>
+        {% endfor %}
 </ul>

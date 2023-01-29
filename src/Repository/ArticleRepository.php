@@ -52,6 +52,19 @@ class ArticleRepository extends ServiceEntityRepository
         return new Paginator($query);
     }
 
+    public function findByCategorie($idCategorie): mixed
+    {
+        $querybuilder = $this->createQueryBuilder('article');
+        $querybuilder->where('article.published = true');
+        $querybuilder->leftJoin('article.categories', 'categorie');
+        $querybuilder->addSelect('categorie');
+        $querybuilder->andWhere('categorie.id = :id');
+        $querybuilder->setParameter('id', $idCategorie);
+        $querybuilder->orderBy('article.createdAt', 'DESC');
+
+        return $querybuilder->getQuery()->getResult();
+    }
+
     public function findByIDWithOrderedComments($articleID) : mixed
     {
         $queryBuilder = $this->createQueryBuilder('article');

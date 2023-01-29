@@ -34,7 +34,7 @@ class BlogController extends AbstractController
         $entityManager->flush();
 */
 
-        $perPage = 5;   // TODO Variable globale
+        $perPage = $this->getParameter('article_per_page');
         $articleRepo = $entityManager->getRepository(Article::class);
         $articles = $articleRepo->findPublishedArticlesPaged($nPage, $perPage);
 

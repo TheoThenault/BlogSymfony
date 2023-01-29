@@ -13,8 +13,21 @@
 {% endblock %}
 
 {% block content_blog %}
-    <h2>{{ article.title }}</h2>
-    <h3>{{ article.author }}</h3>
-    <h4>{{ article.createdAt|date('d-m-Y') }} {% if article.updatedAt is not null %} / {{ article.updatedAt|date('d-m-Y') }} {% endif %}</h4>
-    <p>{{ article.content }}</p>
+    <article>
+        <h2>{{ article.title }}</h2>
+        <h3>{{ article.author }}</h3>
+        <h4>{{ article.createdAt|date('d-m-Y') }} {% if article.updatedAt is not null %} / {{ article.updatedAt|date('d-m-Y') }} {% endif %}</h4>
+        <p>{{ article.content }}</p>
+    </article>
+    {% if article.comments is not empty %}
+    <ul>
+        {% for comment in article.comments %}
+            <li>
+                <h4>{{ comment.author }} : {{ comment.title }}</h4>
+                <h5>{{ comment.createdAt|date('Y-m-d') }}</h5>
+                <p>{{ comment.message }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 {% endblock %}

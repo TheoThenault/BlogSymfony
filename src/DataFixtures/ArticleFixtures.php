@@ -37,7 +37,7 @@ class ArticleFixtures
 
         $a = new Article();
         $a->setCreatedAt(new \DateTime('2023-01-29'))->setNbViews(0)->setAuthor('Théo');
-        $a->setTitle('Lorem')->setContent('Dolore menandri idque te definitionem iaculis mattis. Donec cetero instructior dolores verterem vituperatoribus. Vim eos elitr mandamus fabulas tritani laoreet persius fusce postulant.')->setPublished(true);
+        $a->setTitle('Lorem')->setContent('Posidonium id causae turpis gravida facilisis platonem brute. Debet finibus congue velit solum ridiculus autem. At epicuri natoque posse praesent idque epicuri. Dolore labores morbi aliquid regione inciderint varius sententiae simul appetere. Ornatus tempus graecis euripidis propriae rutrum. Ancillae mei impetus habitant sed. Sanctus cum ponderum mel reformidans aliquet fugit. Conubia eum tincidunt mediocrem mollis auctor prompta eripuit parturient sem. Sociis decore mentitum adversarium eripuit sumo enim novum inimicus donec. Aenean falli atqui aperiri iusto torquent volutpat eleifend quidam. Enim donec viris blandit eloquentiam altera omittantur expetendis id. Adipisci offendit prodesset condimentum impetus suspendisse vim. Ludus erat appareat iaculis ius. Aeque aliquid veniam urna disputationi wisi noster semper maiestatis. Cum commune velit doming nisi persius tritani viderer. Viverra cum aliquam nihil habitant ancillae finibus evertitur maecenas. Quaestio ipsum propriae neglegentur putent suscipit. Vidisse mazim mei lorem hendrerit deterruisset senectus definiebas. Postulant adipiscing legimus natum discere. Felis consetetur euismod solet nec nobis suspendisse.')->setPublished(true);
         $this->list_articles[] = $a;
         $manager->persist($a);
 

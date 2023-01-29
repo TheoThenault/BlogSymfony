@@ -1,7 +1,7 @@
 {% macro gen(article) %}
     <article>
         {# nom de l'article #}
-        <a href="{{ path('blog_view', {'idArticle': article.id}) }}">Article {{ article.title }}</a>
+        <a href="{{ path('blog_view', {'idArticle': article.id}) }}">{{ article.title }}</a>
 
         {# description #}
         <p>

@@ -3,6 +3,7 @@ twig:
     globals:
         article_max_chars: 50
         last_articles_len: 5
+        article_title_preview_len: 20
 
 when@test:
     twig:

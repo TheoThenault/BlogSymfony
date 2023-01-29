@@ -25,8 +25,8 @@
         <div style="display: flex">
             {# DERNIERS ARTICLES #}
             <ul style="padding: 0; margin: 0 40px 0 0; max-width: 250px;">
-                <li><h2>Derniers articles</h2></li>
-                {% block left_menu %}{{ include('last_articles.html.twig', {'nArticles': last_articles_len}) }}{% endblock %}
+                <li><h2>{{ last_articles_len }} derniers articles</h2></li>
+                {% block left_menu %}{{ render(controller('App\\Controller\\Twig\\LastArticleController::lastArticle', {'number' : last_articles_len})) }}{% endblock %}
             </ul>
 
             {# CONTENU DE LA PAGE #}

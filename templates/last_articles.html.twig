@@ -1,6 +1,6 @@
 <ul>
-    {% for i in 1..nArticles %}
-        <li><a href="{{ path('blog_view', {'idArticle': i}) }}">Article {{ i }}</a></li>
+    {% for article in articles %}
+        <li><a href="{{ path('blog_view', {'idArticle': article.id}) }}">{{ article.title|u.truncate(article_title_preview_len) }}</a></li>
     {% else %}
         <li><p>Aucun article!</p></li>
     {% endfor %}

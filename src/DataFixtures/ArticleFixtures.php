@@ -41,6 +41,11 @@ class ArticleFixtures
         $a->setTitle('Ceci est un très très (trop ?) long titre d\'article !')->setContent('Pour tester le truncate!')->setPublished(true);
         $manager->persist($a);
 
+        $a = new Article();
+        $a->setCreatedAt(new \DateTime('2023-01-29'))->setNbViews(0)->setAuthor('Théo');
+        $a->setTitle('Plus de 5 articles !')->setContent('Dolore menandri idque te definitionem iaculis mattis. Donec cetero instructior dolores verterem vituperatoribus. Vim eos elitr mandamus fabulas tritani laoreet persius fusce postulant.')->setPublished(true);
+        $manager->persist($a);
+
         $manager->flush();
     }
 }

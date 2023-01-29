@@ -44,7 +44,7 @@ class BlogController extends AbstractController
             throw new NotFoundHttpException('La page n\'existe pas');
         }
 
-        return $this->render('blog/list/list.html.twig', ['listArticles' => $articles]);
+        return $this->render('blog/list/list.html.twig', ['listArticles' => $articles, 'currPage' => $nPage, 'pageMax' => $pageMax]);
     }
 
     #[Route(

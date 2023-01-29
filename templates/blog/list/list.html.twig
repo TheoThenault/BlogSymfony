@@ -12,6 +12,18 @@
                 <li>{{ utils.gen(article) }}</li>
             {% endfor %}
         </ul>
+
+        <nav style="text-align: center">
+            {% if pageMax > 1 %}
+                {% for page in 1..pageMax %}
+                    {% if page != currPage %}
+                        <a href="{{ path('blog_list', {'nPage': page}) }}">{{ page }}</a>
+                    {% else %}
+                        <a>{{ page }}</a>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </nav>
     {% else %}
         <h2>Aucun articles pour l'instant !</h2>
     {% endif %}

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Categorie;
+use App\Form\ArticleType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -89,7 +90,11 @@ class BlogController extends AbstractController
             return $this->redirectToRoute('blog_list'); //TODO? rediriger vers la lecture de l'article?
         }
 
-        return $this->render('blog/edit/edit.html.twig');
+        $form = $this->createForm(ArticleType::class, null);
+
+        return $this->render('blog/edit/edit.html.twig', [
+            'formulaire' => $form->createView()
+        ]);
     }
 
     #[Route(

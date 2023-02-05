@@ -1,3 +1,7 @@
 div.errors > * {
     color: red;
 }
+
+p.flash {
+    color: forestgreen;
+}

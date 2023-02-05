@@ -57,7 +57,7 @@ class BlogController extends AbstractController
         '/article/add',
         name:           '_add'
     )]
-    public function addArticle(Request $request, ValidatorInterface $validator): Response
+    public function addArticle(Request $request, EntityManagerInterface $entityManager): Response
     {
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
@@ -71,6 +71,8 @@ class BlogController extends AbstractController
             dump($response);
 
             // messasge de succès
+            //$entityManager->persist($article);
+            //$entityManager->flush();
             $this->addFlash('info', 'Article créé !');
             //return $this->redirectToRoute('blog_list');
         }

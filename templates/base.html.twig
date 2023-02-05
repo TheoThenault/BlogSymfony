@@ -20,7 +20,7 @@
 
         {# MESSAGES FLASH #}
         {% for msg in app.session.flashBag.get('info') %}
-            <p>{{ msg }}</p>
+            <p class="flash">{{ msg }}</p>
         {% endfor %}
 
         <div style="display: flex">

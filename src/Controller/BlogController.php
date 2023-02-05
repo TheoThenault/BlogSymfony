@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Entity\Categorie;
 use App\Form\ArticleType;
+use App\Services\SpamFinder;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -25,20 +26,22 @@ class BlogController extends AbstractController
         requirements:   ['nPage' => '\d+'],
         defaults:       ['nPage' => 1]
     )]
-    public function listArticles($nPage, EntityManagerInterface $entityManager): Response
+    public function listArticles($nPage, EntityManagerInterface $entityManager, SpamFinder $finder): Response
     {
         if($nPage <= 0)
         {
             //TODO? Page 404 personnalisé ?
             throw new NotFoundHttpException('La page n\'existe pas');
         }
-/*
-        $ArticleParDefaut = new Article();
-        $ArticleParDefaut->setAuthor("Théo")->setContent("Test")->setCreatedAt(new \DateTime('2023-01-29'))
-            ->setNbViews(0)->setPublished(true)->setTitle("Test");
-        $entityManager->persist($ArticleParDefaut);
-        $entityManager->flush();
-*/
+
+        $res = $finder->isSpam('aaaaaaaaaaaaa');
+        dump('\'aaaaaaaaaaaaa\' est un spam ? ' . ($res?'oui':'non'));
+        $res = $finder->isSpam('sdfsdfsdfsdf');
+        dump('\'sdfsdfsdfsdf\' est un spam ? ' . ($res?'oui':'non'));
+        $res = $finder->isSpam('ahahahahah');
+        dump('\'ahahahahah\' est un spam ? ' . ($res?'oui':'non'));
+        $res = $finder->isSpam('Le message precédent est acceptable.');
+        dump('\'Le message precédent est acceptable.\' est un spam ? ' . ($res?'oui':'non'));
 
         $perPage = $this->getParameter('article_per_page');
         $articleRepo = $entityManager->getRepository(Article::class);

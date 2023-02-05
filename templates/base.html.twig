@@ -11,6 +11,11 @@
             {# INTITULÉ DE LA PAGE #}
             <h1>{% block h1 %}Blog sur le développement symfony{% endblock %}</h1>
 
+            <nav>
+                <p>{{ app.user.nom }} {{ app.user.prenom }}</p>
+                <a href="{{ path('app_logout') }}">Déconexion</a>
+            </nav>
+
             {# MENU DE NAVIGATION #}
             <nav>
             {% block menu %}
@@ -36,7 +41,7 @@
                 </div>
             </div>
             {% block footer %}{% endblock %}
-            
+
         {% endblock %}
     </body>
 </html>

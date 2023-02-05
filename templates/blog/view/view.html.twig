@@ -29,9 +29,12 @@
             </nav>
         </h4>
 
-
         <p>{{ article.content }}</p>
+
+        <p>Nombre de vues: {{ article.nbViews }}</p>
     </article>
+
+
     {% if article.comments is not empty %}
     <ul>
         {% for comment in article.comments %}

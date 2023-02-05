@@ -25,6 +25,60 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 128)]
     private ?string $prenom = null;
 
+    /**
+     * @return string|null
+     */
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    /**
+     * @param string|null $nom
+     * @return User
+     */
+    public function setNom(?string $nom): User
+    {
+        $this->nom = $nom;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    /**
+     * @param string|null $prenom
+     * @return User
+     */
+    public function setPrenom(?string $prenom): User
+    {
+        $this->prenom = $prenom;
+        return $this;
+    }
+
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getDateNaissance(): ?\DateTimeInterface
+    {
+        return $this->dateNaissance;
+    }
+
+    /**
+     * @param \DateTimeInterface|null $dateNaissance
+     * @return User
+     */
+    public function setDateNaissance(?\DateTimeInterface $dateNaissance): User
+    {
+        $this->dateNaissance = $dateNaissance;
+        return $this;
+    }
+
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateNaissance = null;
 

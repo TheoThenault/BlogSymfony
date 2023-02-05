@@ -19,16 +19,16 @@ class ArticleType extends AbstractType
                 'label' => 'Titre'
             ])
             ->add('content', TextareaType::class, [
-                'label' => 'Contenu'
+                'label' => 'Contenu', 'required' => false
             ])
             ->add('author', TextType::class, [
-                'label' => 'Auteur'
+                'label' => 'Auteur', 'required' => false
             ])
             ->add('nbViews', IntegerType::class, [
                 'label' => 'Nombre de vues'
             ])
             ->add('published', CheckboxType::class, [
-                'label' => 'Publié'
+                'label' => 'Publié', 'required' => false
             ])
         ;
     }

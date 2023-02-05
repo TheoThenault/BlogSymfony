@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article
@@ -17,9 +19,11 @@ class Article
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Un article doit avoir un titre.')]
     private ?string $title = null;
 
     #[ORM\Column(length: 1000)]
+    // Voir validate()
     private ?string $content = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -32,6 +36,7 @@ class Article
     private ?string $author = null;
 
     #[ORM\Column]
+    #[Assert\PositiveOrZero]
     private ?int $nbViews = null;
 
     #[ORM\Column]
@@ -42,6 +47,17 @@ class Article
 
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'articles')]
     private Collection $categories;
+
+    #[Assert\Callback]
+    public function validate(ExecutionContextInterface $context, $payload): void
+    {
+        if(strcmp($this->title, $this->content) == 0)
+        {
+            $context->buildViolation('Le contenu doit etre différent du titre!')
+                ->atPath('content')
+                ->addViolation();
+        }
+    }
 
     public function __construct()
     {

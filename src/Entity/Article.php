@@ -3,12 +3,19 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use App\Services\SpamFinder;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
+use Symfony\Component\Console\Logger\ConsoleLogger;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Runtime\Symfony\Component\Console\Output\OutputInterfaceRuntime;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article
@@ -54,6 +61,28 @@ class Article
         if(strcmp($this->title, $this->content) == 0)
         {
             $context->buildViolation('Le contenu doit etre différent du titre!')
+                ->atPath('content')
+                ->addViolation();
+        }
+
+        $handler = $context->getRoot()->getConfig()->getRequestHandler();
+        $handlerRef = new \ReflectionObject($handler);
+        $serverParamsRefProp = $handlerRef->getProperty('serverParams');
+        $serverParamsRefProp->setAccessible(true);
+        $serverParamsVal = $serverParamsRefProp->getValue($handler);
+        $serverParamsRef = new \ReflectionObject($serverParamsVal);
+        $stackRefProp = $serverParamsRef->getProperty('requestStack');
+        $stackRefProp->setAccessible(true);
+        $stack = $stackRefProp->getValue($serverParamsVal);
+
+        $verbosityLevelMap = [
+            LogLevel::NOTICE => ConsoleOutput::VERBOSITY_NORMAL,
+            LogLevel::INFO   => ConsoleOutput::VERBOSITY_NORMAL,
+        ];
+        $finder = new SpamFinder(new ConsoleLogger(new ConsoleOutput(), $verbosityLevelMap), $stack);
+        if($finder->isSpam($this->content))
+        {
+            $context->buildViolation('Le contenu a été détecter comme du spam !')
                 ->atPath('content')
                 ->addViolation();
         }

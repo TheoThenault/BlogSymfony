@@ -32,6 +32,9 @@ security:
         ROLE_USER: ROLE_USER # Un utilisateur avec le rôle ROLE_AUTHOR aura à minima les droits d'un ROLE_USER
         ROLE_ADMIN: ROLE_USER # idem pour un utilisateur ROLE_ADMIN
     access_control:
+        - { path: ^/blog/article/edit, roles: ROLE_ADMIN }
+        - { path: ^/blog/article/add, roles: ROLE_ADMIN }
+        - { path: ^/blog/article/delete, roles: ROLE_ADMIN }
         - { path: ^/blog, roles: ROLE_USER }
         # - { path: ^/profile, roles: ROLE_USER }
 

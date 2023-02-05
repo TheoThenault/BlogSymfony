@@ -10,7 +10,9 @@
 
 {% block menu %}
     {{ parent() }}
-    <a href="{{ path('blog_add') }}">Ajouter une page</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('blog_add') }}">Ajouter une page</a>
+    {% endif %}
 {% endblock %}
 
 {% block content %}

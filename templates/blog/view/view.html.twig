@@ -8,8 +8,10 @@
 
 {% block menu %}
     {{ parent() }}
-    <a href="{{ path('blog_edit', {'idArticle': article.id}) }}">Modifier</a>
-    <a href="{{ path('blog_delete', {'idArticle': article.id}) }}">Supprimer</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('blog_edit', {'idArticle': article.id}) }}">Modifier</a>
+        <a href="{{ path('blog_delete', {'idArticle': article.id}) }}">Supprimer</a>
+    {% endif %}
 {% endblock %}
 
 {% block content_blog %}

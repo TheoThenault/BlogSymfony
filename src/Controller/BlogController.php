@@ -88,24 +88,32 @@ class BlogController extends AbstractController
         requirements:   ['$idArticle' => '\d+'],
         defaults:       ['$idArticle' => 0]
     )]
-    public function editArticle($idArticle): Response
+    public function editArticle($idArticle, EntityManagerInterface $entityManager, Request $request): Response
     {
         if($idArticle <= 0)
         {
             //TODO? Page 404 personnalisé ?
             throw new NotFoundHttpException('La page n\'existe pas');
         }
-        
-        if(false)
+        $articleRepo = $entityManager->getRepository(Article::class);
+        $article = $articleRepo->findOneBy(['id' => $idArticle]);
+        if(is_null($article))
+        {
+            throw new NotFoundHttpException('La page n\'existe pas');
+        }
+
+        $form = $this->createForm(ArticleType::class, $article);
+        $form->add('send', SubmitType::class);
+        $form ->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
         {
             // traitement du formulaire
 
             // messasge de succès
             $this->addFlash('info', 'Article modifié !');
-            return $this->redirectToRoute('blog_list'); //TODO? rediriger vers la lecture de l'article?
+            //return $this->redirectToRoute('blog_list');
         }
-
-        $form = $this->createForm(ArticleType::class, null);
 
         return $this->render('blog/edit/edit.html.twig', [
             'formulaire' => $form->createView()

@@ -6,34 +6,37 @@
         <link rel="stylesheet" href="{{ asset('style.css') }}">
     </head>
     <body>
+        {% block body %}
 
-        {# INTITULÉ DE LA PAGE #}
-        <h1>{% block h1 %}Blog sur le développement symfony{% endblock %}</h1>
+            {# INTITULÉ DE LA PAGE #}
+            <h1>{% block h1 %}Blog sur le développement symfony{% endblock %}</h1>
 
-        {# MENU DE NAVIGATION #}
-        <nav>
-        {% block menu %}
-            <a href="{{ path('base') }}">Acceuil</a>
-            <a href="{{ path('blog_list') }}">Blog</a>
-        {% endblock %}
-        </nav>
+            {# MENU DE NAVIGATION #}
+            <nav>
+            {% block menu %}
+                <a href="{{ path('base') }}">Acceuil</a>
+                <a href="{{ path('blog_list') }}">Blog</a>
+            {% endblock %}
+            </nav>
 
-        {# MESSAGES FLASH #}
-        {% for msg in app.session.flashBag.get('info') %}
-            <p class="flash">{{ msg }}</p>
-        {% endfor %}
+            {# MESSAGES FLASH #}
+            {% for msg in app.session.flashBag.get('info') %}
+                <p class="flash">{{ msg }}</p>
+            {% endfor %}
 
-        <div style="display: flex">
-            {# DERNIERS ARTICLES ET CATEGORIES #}
-            <ul style="padding: 0; margin: 0 40px 0 0; max-width: 250px; min-width: 200px">
-                {% block left_menu %}{{ render(controller('App\\Controller\\Twig\\LastArticleController::lastArticle', {'number' : last_articles_len})) }}{% endblock %}
-            </ul>
+            <div style="display: flex">
+                {# DERNIERS ARTICLES ET CATEGORIES #}
+                <ul style="padding: 0; margin: 0 40px 0 0; max-width: 250px; min-width: 200px">
+                    {% block left_menu %}{{ render(controller('App\\Controller\\Twig\\LastArticleController::lastArticle', {'number' : last_articles_len})) }}{% endblock %}
+                </ul>
 
-            {# CONTENU DE LA PAGE #}
-            <div style="right: 0">
-            {% block content %}{% endblock %}
+                {# CONTENU DE LA PAGE #}
+                <div style="right: 0">
+                {% block content %}{% endblock %}
+                </div>
             </div>
-        </div>
-        {% block footer %}{% endblock %}
+            {% block footer %}{% endblock %}
+            
+        {% endblock %}
     </body>
 </html>

@@ -7,9 +7,13 @@ use App\Entity\Categorie;
 use App\Form\ArticleType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[Route('/blog', name: 'blog')]
 class BlogController extends AbstractController
@@ -53,18 +57,27 @@ class BlogController extends AbstractController
         '/article/add',
         name:           '_add'
     )]
-    public function addArticle(): Response
+    public function addArticle(Request $request, ValidatorInterface $validator): Response
     {
-        if(false)
+        $article = new Article();
+        $form = $this->createForm(ArticleType::class, $article);
+        $form->add('send', SubmitType::class);
+        $form ->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
         {
             // traitement du formulaire
+            $response = $form->getData();
+            dump($response);
 
             // messasge de succès
             $this->addFlash('info', 'Article créé !');
-            return $this->redirectToRoute('blog_list'); //TODO? rediriger vers la lecture de l'article?
+            //return $this->redirectToRoute('blog_list');
         }
 
-        return $this->render('blog/add/add.html.twig');
+        return $this->render('blog/add/add.html.twig', [
+            'formulaire' => $form->createView()
+        ]);
     }
 
     #[Route(

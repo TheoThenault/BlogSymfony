@@ -25,7 +25,7 @@ class ArticleType extends AbstractType
                 'label' => 'Auteur', 'required' => false
             ])
             ->add('nbViews', IntegerType::class, [
-                'label' => 'Nombre de vues'
+                'label' => 'Nombre de vues', 'data' => 1, 'attr' => ['min' => 0]
             ])
             ->add('published', CheckboxType::class, [
                 'label' => 'Publié', 'required' => false

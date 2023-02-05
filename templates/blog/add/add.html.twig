@@ -8,5 +8,5 @@
 
 {% block content_blog %}
     <h2>Création d'un article</h2>
-    {{ include('blog/form.html.twig') }}
+    {{ include('blog/form.html.twig', {'formulaire': formulaire}) }}
 {% endblock %}

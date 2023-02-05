@@ -1,1 +1,42 @@
-<p>Faire un formulaire ici</p>
+{{ form_start(formulaire) }}
+
+    <div class="errors">
+    {{ form_errors(formulaire.title) }}
+    {{ form_errors(formulaire.content) }}
+    {{ form_errors(formulaire.author) }}
+    {{ form_errors(formulaire.nbViews) }}
+    {{ form_errors(formulaire.published) }}
+    {{ form_errors(formulaire) }}
+    </div>
+
+    <div>
+        {{ form_label(formulaire.title) }}
+        {{ form_widget(formulaire.title) }}
+    </div>
+
+    <div>
+        {{ form_label(formulaire.content) }}
+        {{ form_widget(formulaire.content) }}
+    </div>
+
+    <div>
+        {{ form_label(formulaire.author) }}
+        {{ form_widget(formulaire.author) }}
+    </div>
+
+    <div>
+        {{ form_label(formulaire.nbViews) }}
+        {{ form_widget(formulaire.nbViews) }}
+    </div>
+
+    <div>
+        {{ form_label(formulaire.published) }}
+        {{ form_widget(formulaire.published) }}
+    </div>
+
+    <div>
+        {{ form_rest(formulaire) }}
+    </div>
+
+
+{{ form_end(formulaire) }}

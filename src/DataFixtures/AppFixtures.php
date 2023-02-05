@@ -3,9 +3,9 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 class AppFixtures extends Fixture
 {

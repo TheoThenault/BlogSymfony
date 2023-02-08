@@ -98,6 +98,15 @@ class Article
         }
     }
 
+    #[ORM\PrePersist]
+    public function viewCount() : void
+    {
+        if($this->getNbViews() % 10 == 0)
+        {
+            dump("pleins de vues");
+        }
+    }
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();

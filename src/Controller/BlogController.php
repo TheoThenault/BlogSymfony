@@ -179,6 +179,7 @@ class BlogController extends AbstractController
             throw new NotFoundHttpException('La page n\'existe pas');
         }
         $article->setNbViews($article->getNbViews() + 1);
+        $entityManager->persist($article);
         $entityManager->flush();
         return $this->render('blog/view/view.html.twig', ['article' => $article]);
     }

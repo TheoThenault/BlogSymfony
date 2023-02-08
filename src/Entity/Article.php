@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Runtime\Symfony\Component\Console\Output\OutputInterfaceRuntime;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -56,6 +57,10 @@ class Article
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'articles')]
     private Collection $categories;
 
+    #[ORM\Column(length: 255, unique: true, nullable: true)]
+    #[Gedmo\Slug(fields: ['title', 'author', 'createdAt'])]
+    private ?string $slug = null;
+
     #[Assert\Callback]
     public function validate(ExecutionContextInterface $context, $payload): void
     {
@@ -95,15 +100,6 @@ class Article
         if(is_null($this->getAuthor()))
         {
             $this->setAuthor("anonimous");
-        }
-    }
-
-    #[ORM\PrePersist]
-    public function viewCount() : void
-    {
-        if($this->getNbViews() % 10 == 0)
-        {
-            dump("pleins de vues");
         }
     }
 
@@ -252,6 +248,18 @@ class Article
     public function removeCategory(Categorie $category): self
     {
         $this->categories->removeElement($category);
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

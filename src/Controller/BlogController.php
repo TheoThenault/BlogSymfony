@@ -88,10 +88,11 @@ class BlogController extends AbstractController
             dump($response);
 
             // messasge de succès
-            //$entityManager->persist($article);
-            //$entityManager->flush();
+            $article->setCreatedAt(new \DateTime('now'));
+            $entityManager->persist($article);
+            $entityManager->flush();
             $this->addFlash('info', 'Article créé !');
-            //return $this->redirectToRoute('blog_list');
+            return $this->redirectToRoute('blog_list');
         }
 
         return $this->render('blog/add/add.html.twig', [
@@ -129,7 +130,9 @@ class BlogController extends AbstractController
 
             // messasge de succès
             $this->addFlash('info', 'Article modifié !');
-            //return $this->redirectToRoute('blog_list');
+            $entityManager->persist($article);
+            $entityManager->flush();
+            return $this->redirectToRoute('blog_list');
         }
 
         return $this->render('blog/edit/edit.html.twig', [
@@ -150,10 +153,9 @@ class BlogController extends AbstractController
             //TODO? Page 404 personnalisé ?
             throw new NotFoundHttpException('La page n\'existe pas');
         }
-
+        // TODO
         // messasge de succès
         $this->addFlash('info', 'Article suprimé !');
-
         return $this->redirectToRoute('blog_list');
     }
 
@@ -178,7 +180,6 @@ class BlogController extends AbstractController
         }
         $article->setNbViews($article->getNbViews() + 1);
         $entityManager->flush();
-
         return $this->render('blog/view/view.html.twig', ['article' => $article]);
     }
 

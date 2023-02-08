@@ -18,6 +18,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Runtime\Symfony\Component\Console\Output\OutputInterfaceRuntime;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Article
 {
     #[ORM\Id]
@@ -85,6 +86,15 @@ class Article
             $context->buildViolation('Le contenu a été détecter comme du spam !')
                 ->atPath('content')
                 ->addViolation();
+        }
+    }
+
+    #[ORM\PrePersist]
+    public function nullAuthorVerif() : void
+    {
+        if(is_null($this->getAuthor()))
+        {
+            $this->setAuthor("anonimous");
         }
     }
 

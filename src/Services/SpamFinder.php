@@ -24,7 +24,7 @@ class SpamFinder
         $isSpam = false;
         // vérif
         $isAhahahaha = false;
-        for($combSize = 1; $combSize < 9 && $combSize < (strlen($text)/2)+1; $combSize++)
+        for($combSize = 1; $combSize < 9 && $combSize+1 < (strlen($text)/2); $combSize++)
         {
             $this->combinaisons = array();
             for($i = 0; ($i+$combSize) < strlen($text); $i+=$combSize)

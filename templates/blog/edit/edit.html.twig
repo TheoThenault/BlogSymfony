@@ -1,12 +1,12 @@
 {% extends 'blog/blog.html.twig' %}
 
-{% block title %}Modification{% endblock %}
+{% block title %}{% trans %}Modification{% endtrans %}{% endblock %}
 
 {% block h1 %}
-    Modifier un article
+    {% trans %}Modifier un article{% endtrans %}
 {% endblock %}
 
 {% block content_blog %}
-    <h2>Modification d'un article</h2>
+    <h2>{% trans %}Modification d'un article{% endtrans %}</h2>
     {{ form(formulaire) }}
 {% endblock %}

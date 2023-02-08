@@ -1,12 +1,12 @@
 {% extends 'blog/blog.html.twig' %}
 
-{% block title %}Création{% endblock %}
+{% block title %}{% trans %}Création{% endtrans %}{% endblock %}
 
 {% block h1 %}
-    Écrire un article
+    {% trans %}Écrire un article{% endtrans %}
 {% endblock %}
 
 {% block content_blog %}
-    <h2>Création d'un article</h2>
+    <h2>{% trans %}Création d'un article{% endtrans %}</h2>
     {{ include('blog/form.html.twig', {'formulaire': formulaire}) }}
 {% endblock %}

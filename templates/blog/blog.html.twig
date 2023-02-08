@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ parent() }} ~ by théo
+    {{ parent() }} ~ {% trans %}by{% endtrans %} théo
 {% endblock %}
 
 {% block h1 %}
-    Bienvenue sur mon blog
+    {% trans %}Bienvenue sur mon blog{% endtrans %}
 {% endblock %}
 
 {% block menu %}
     {{ parent() }}
     {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('blog_add') }}">Ajouter une page</a>
+        <a href="{{ path('blog_add') }}">{% trans %}Ajouter une page{% endtrans %}</a>
     {% endif %}
 {% endblock %}
 
@@ -22,4 +22,8 @@
 
 {% block footer %}
     <p>"Ce blog est super!"  -  <i>Théo Thénault, 2023</i></p>
+    <nav>
+        <a href="{{ path('blog_list', {'_locale': 'fr'}) }}">{% trans %}Version Francaise{% endtrans %}</a>
+        <a href="{{ path('blog_list', {'_locale': 'en'}) }}">{% trans %}English Version{% endtrans %}</a>
+    </nav>
 {% endblock %}

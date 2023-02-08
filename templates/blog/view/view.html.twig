@@ -1,16 +1,16 @@
 {% extends 'blog/blog.html.twig' %}
 
-{% block title %}Lecture{% endblock %}
+{% block title %}{% trans %}Lecture{% endtrans %}{% endblock %}
 
 {% block h1 %}
-    Lecture d'article
+    {% trans %}Lecture d'article{% endtrans %}
 {% endblock %}
 
 {% block menu %}
     {{ parent() }}
     {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('blog_edit', {'idArticle': article.id}) }}">Modifier</a>
-        <a href="{{ path('blog_delete', {'idArticle': article.id}) }}">Supprimer</a>
+        <a href="{{ path('blog_edit', {'idArticle': article.id}) }}">{% trans %}Modifier{% endtrans %}</a>
+        <a href="{{ path('blog_delete', {'idArticle': article.id}) }}">{% trans %}Supprimer{% endtrans %}</a>
     {% endif %}
 {% endblock %}
 
@@ -24,7 +24,7 @@
             <nav>
                 {% for categorie in article.categories %}
                     {% if loop.first %}
-                        <span>Catégories: </span>
+                        <span>{% trans %}Catégories{% endtrans %}: </span>
                     {% endif %}
                     <a href="{{ path('blog_categorie', {'idCategorie': categorie.id}) }}">{{ categorie.name }}</a>
                 {% endfor %}
@@ -33,7 +33,7 @@
 
         <p>{{ article.content }}</p>
 
-        <p>Nombre de vues: {{ article.nbViews }}</p>
+        <p>{% trans %}Nombre de vues{% endtrans %}: {{ article.nbViews }}</p>
     </article>
 
 

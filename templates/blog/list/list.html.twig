@@ -1,12 +1,12 @@
 {% extends 'blog/blog.html.twig' %}
 
-{% block title %}Liste des articles{% endblock %}
+{% block title %}{% trans %}Liste des articles{% endtrans %}{% endblock %}
 
 {% import 'blog/list/macro.html.twig' as utils %}
 
 {% block content_blog %}
     {% if listArticles is defined and listArticles is not empty %}
-        <h2>Liste:</h2>
+        <h2>{% trans %}Liste{% endtrans %}:</h2>
         <ul>
             {% for article in listArticles %}
                 <li>{{ utils.gen(article) }}</li>
@@ -25,6 +25,6 @@
             {% endif %}
         </nav>
     {% else %}
-        <h2>Aucun articles pour l'instant !</h2>
+        <h2>{% trans %}Aucun articles pour l'instant !{% endtrans %}</h2>
     {% endif %}
 {% endblock %}

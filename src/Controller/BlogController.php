@@ -15,8 +15,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
-#[Route('/blog', name: 'blog')]
+#[Route('/blog/{_locale}', name: 'blog',
+    defaults: ['_locale' => 'fr']
+)]
 class BlogController extends AbstractController
 {
 
@@ -60,10 +63,21 @@ class BlogController extends AbstractController
         '/article/add',
         name:           '_add'
     )]
-    public function addArticle(Request $request, EntityManagerInterface $entityManager): Response
+    public function addArticle(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator ): Response
     {
+        $translations = [
+           'title'   => $translator->trans('Titre'),
+           'content' => $translator->trans('Contenu'),
+           'author'  => $translator->trans('Auteur'),
+           'nbViews' => $translator->trans('Nombre de vues'),
+           'published' => $translator->trans('Publié')
+        ];
+
+        $locale = $request->getLocale();
+        dump($locale);
+
         $article = new Article();
-        $form = $this->createForm(ArticleType::class, $article);
+        $form = $this->createForm(ArticleType::class, $article, ['labels_translation' => $translations]);
         $form->add('send', SubmitType::class);
         $form ->handleRequest($request);
 

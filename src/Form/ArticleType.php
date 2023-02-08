@@ -16,19 +16,19 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Titre'
+                'label' => $options['labels_translation']['title']
             ])
             ->add('content', TextareaType::class, [
-                'label' => 'Contenu', 'required' => false
+                'label' => $options['labels_translation']['content'], 'required' => false
             ])
             ->add('author', TextType::class, [
-                'label' => 'Auteur', 'required' => false
+                'label' => $options['labels_translation']['author'], 'required' => false
             ])
             ->add('nbViews', IntegerType::class, [
-                'label' => 'Nombre de vues', 'data' => 1, 'attr' => ['min' => 0]
+                'label' => $options['labels_translation']['nbViews'], 'data' => 1, 'attr' => ['min' => 0]
             ])
             ->add('published', CheckboxType::class, [
-                'label' => 'Publié', 'required' => false
+                'label' => $options['labels_translation']['published'], 'required' => false
             ])
         ;
     }
@@ -37,6 +37,7 @@ class ArticleType extends AbstractType
     {
         $resolver->setDefaults([
             // Configure your form options here
+            'labels_translation' => []
         ]);
     }
 }

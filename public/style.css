@@ -81,3 +81,25 @@ li.article > h4{
 li.article:hover {
     background: #fcfbff;
 }
+
+article.article-view {
+    border-bottom: 1px solid black;
+}
+
+li.comment:not(:last-child) {
+    border-bottom: 1px solid black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -22,7 +22,7 @@ class AppFixtures extends Fixture
 
         $user = new User();
         $user->setNom('Thénault')->setPrenom('Théo')->setDateNaissance(new DateTime('2001-03-01'));
-        $user->setEmail('theo.thenault@email.com')->setRoles(['ROLE_USER']);
+        $user->setEmail('user@email.com')->setRoles(['ROLE_USER']);
         $user->setPassword('$2y$13$viDdenVdWndIFbZ9N.zdk.8.Uf3Vq3AfA1VrxZUo9TOvd1eq1dzhS');
         $manager->persist($user);
 

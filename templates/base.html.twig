@@ -11,10 +11,12 @@
             {# INTITULÉ DE LA PAGE #}
             <h1>{% block h1 %}{% trans %}Blog sur le développement symfony{% endtrans %}{% endblock %}</h1>
 
-            <nav>
-                <p style="display: inline;">{{ app.user.nom }} {{ app.user.prenom }}</p>
-                <a href="{{ path('app_logout') }}">{% trans %}Déconexion{% endtrans %}</a>
-            </nav>
+            <div style="display:flex; justify-content: flex-end">
+                <nav>
+                    <p style="display: inline;">{{ app.user.nom }} {{ app.user.prenom }}</p>
+                    <a href="{{ path('app_logout') }}">{% trans %}Déconexion{% endtrans %}</a>
+                </nav>
+            </div>
 
             {# MENU DE NAVIGATION #}
             <nav>

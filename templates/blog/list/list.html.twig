@@ -9,7 +9,7 @@
         <h2>{% trans %}Liste{% endtrans %}:</h2>
         <ul>
             {% for article in listArticles %}
-                <li>{{ utils.gen(article) }}</li>
+                {{ utils.gen(article) }}
             {% endfor %}
         </ul>
 

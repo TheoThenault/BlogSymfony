@@ -1,11 +1,13 @@
 {% macro gen(article) %}
-    <article>
-        {# nom de l'article #}
-        <a href="{{ path('blog_view', {'idArticle': article.id}) }}">{{ article.title }}</a>
+    <a class="article" href="{{ path('blog_view', {'idArticle': article.id}) }}">
+        <li class="article">
+            {# nom de l'article #}
+            <h4>{{ article.title }}</h4>
 
-        {# description #}
-        <p>
-            {{  article.content|u.truncate(article_max_chars) }}
-        </p>
-    </article>
+            {# description #}
+            <p>
+                {{  article.content|u.truncate(article_max_chars) }}
+            </p>
+        </li>
+    </a>
 {% endmacro gen %}

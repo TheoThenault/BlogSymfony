@@ -58,9 +58,26 @@ div.pagination > a#clicker {
 div.pagination > a {
     background-color: WHITE;
     color: BLACK;
+}
+
+li.article {
+    list-style-type: none;
+    padding: 10px 10px 2px 10px;
+    margin: 10px;
+    border-radius: 10px;
+    background: #e0f0ff;
     transition: 200ms linear;
 }
-div.pagination > button:hover {
-    background-color: #bfefff;
-    color: BLACK;
+
+a.article {
+    text-decoration: none;
+    color: black;
+}
+
+li.article > h4{
+    text-decoration: underline;
+}
+
+li.article:hover {
+    background: #fcfbff;
 }

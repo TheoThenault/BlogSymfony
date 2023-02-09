@@ -14,11 +14,16 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">{% trans %}Please sign in{% endtrans %}</h1>
-    <label for="inputEmail">{% trans %}Email{% endtrans %}</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">{% trans %}Password{% endtrans %}</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+    <div class="menuConnexion">
+        <h1 class="h3 mb-3 font-weight-normal">{% trans %}Please sign in{% endtrans %}</h1>
+        <label for="inputEmail">{% trans %}Email{% endtrans %}</label>
+        <input style="margin-bottom: 20px" type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+        <label for="inputPassword">{% trans %}Password{% endtrans %}</label>
+        <input style="margin-bottom: 20px"  type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+        <button class="btn btn-lg btn-primary" type="submit">
+            {% trans %}Sign in{% endtrans %}
+        </button>
+    </div>
 
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
@@ -35,8 +40,5 @@
         </div>
     #}
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        {% trans %}Sign in{% endtrans %}
-    </button>
 </form>
 {% endblock %}

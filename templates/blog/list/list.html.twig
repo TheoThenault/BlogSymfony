@@ -13,18 +13,25 @@
             {% endfor %}
         </ul>
 
-        <nav style="text-align: center">
-            {% if pageMax > 1 %}
-                {% for page in 1..pageMax %}
-                    {% if page != currPage %}
-                        <a href="{{ path('blog_list', {'nPage': page}) }}">{{ page }}</a>
-                    {% else %}
-                        <a>{{ page }}</a>
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
-        </nav>
+        <div clas="flex-center">
+
+        </div>
     {% else %}
         <h2>{% trans %}Aucun articles pour l'instant !{% endtrans %}</h2>
     {% endif %}
+{% endblock %}
+
+{% block footer %}
+    <div class="pagination">
+        {% if pageMax > 1 %}
+            {% for page in 1..pageMax %}
+                {% if page != currPage %}
+                    <a href="{{ path('blog_list', {'nPage': page}) }}">{{ page }}</a>
+                {% else %}
+                    <a id="clicker">{{ page }}</a>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+    {{ parent() }}
 {% endblock %}

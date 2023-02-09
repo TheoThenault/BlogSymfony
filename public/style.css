@@ -24,7 +24,7 @@ div.menuConnexion {
     margin: 0 auto;
 }
 
-div.footer {
+div.flex-center {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,3 +33,34 @@ div.footer {
 
 
 
+div.pagination {
+    width:100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+div.pagination > a {
+    text-align: center;
+    margin: 0 5px;
+    padding: 4px 12px 2px 12px;
+    border-radius: 50%;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+div.pagination > a#clicker {
+    background-color: #93c5fd;
+    color: white;
+}
+
+div.pagination > a {
+    background-color: WHITE;
+    color: BLACK;
+    transition: 200ms linear;
+}
+div.pagination > button:hover {
+    background-color: #bfefff;
+    color: BLACK;
+}

@@ -106,7 +106,7 @@ class BlogController extends AbstractController
         requirements:   ['$idArticle' => '\d+'],
         defaults:       ['$idArticle' => 0]
     )]
-    public function editArticle($idArticle, EntityManagerInterface $entityManager, Request $request): Response
+    public function editArticle($idArticle, EntityManagerInterface $entityManager, Request $request, TranslatorInterface $translator ): Response
     {
         if($idArticle <= 0)
         {
@@ -120,7 +120,16 @@ class BlogController extends AbstractController
             throw new NotFoundHttpException('La page n\'existe pas');
         }
 
-        $form = $this->createForm(ArticleType::class, $article);
+        $translations = [
+            'title'   => $translator->trans('Titre'),
+            'content' => $translator->trans('Contenu'),
+            'author'  => $translator->trans('Auteur'),
+            'nbViews' => $translator->trans('Nombre de vues'),
+            'published' => $translator->trans('Publié')
+        ];
+
+
+        $form = $this->createForm(ArticleType::class, $article, ['labels_translation' => $translations]);
         $form->add('send', SubmitType::class);
         $form ->handleRequest($request);
 
